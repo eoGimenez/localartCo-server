@@ -47,7 +47,7 @@ router.get('/:postId', isAuthenticated, (req, res, next) => {
 	Post.findById(postId)
 		.populate('author')
 		.then((result) => {
-			res.json(data);
+			res.status(200).json(result);
 		})
 		.catch((err) => next(err));
 });
