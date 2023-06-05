@@ -28,15 +28,29 @@ router.get('/:userId', isAuthenticated, (req, res, next) => {
 
 router.put('/:id', isAuthenticated, (req, res, next) => {
 	const { id } = req.params;
-	const { email, password, passwordRe, name, surname, cif, avatar } = req.body;
+	const {
+		email,
+		// password,
+		// passwordRe,
+		name,
+		surname,
+		cif,
+		avatar,
+		commerceName,
+		location,
+		aboutme,
+	} = req.body;
 
 	if (
 		email === '' ||
-		password === '' ||
-		passwordRe === '' ||
+		// password === '' ||
+		// passwordRe === '' ||
 		name === '' ||
 		surname === '' ||
-		cif === ''
+		cif === '' ||
+		commerceName === '' ||
+		location === '' ||
+		aboutme === ''
 	) {
 		res.status(400).json({ message: 'Please, compleate the mandaroty field' });
 		return;
@@ -48,23 +62,33 @@ router.put('/:id', isAuthenticated, (req, res, next) => {
 		return;
 	}
 
-	if (password !== undefined) {
-		const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
-		if (!passwordRegex.test(password)) {
-			res.status(400).json({
-				message:
-					'Password must have at least 6 characters and contain at least one number, one lowercase and one uppercase letter.',
-			});
-			return;
-		}
-	}
+	// if (password !== undefined) {
+	// 	const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+	// 	if (!passwordRegex.test(password)) {
+	// 		res.status(400).json({
+	// 			message:
+	// 				'Password must have at least 6 characters and contain at least one number, one lowercase and one uppercase letter.',
+	// 		});
+	// 		return;
+	// 	}
+	// }
 
-	const salt = bcrypt.genSaltSync(saltRounds);
-	const hashedPassword = bcrypt.hashSync(password, salt);
+	// const salt = bcrypt.genSaltSync(saltRounds);
+	// const hashedPassword = bcrypt.hashSync(password, salt);
 
 	User.findByIdAndUpdate(
 		id,
-		{ email, password: hashedPassword, name, surname, cif, avatar },
+		{
+			email,
+			// password: hashedPassword,
+			name,
+			surname,
+			cif,
+			avatar,
+			commerceName,
+			location,
+			aboutme,
+		},
 		{ new: true }
 	)
 		.then((result) => {
@@ -73,20 +97,20 @@ router.put('/:id', isAuthenticated, (req, res, next) => {
 		.catch((err) => next(err));
 });
 
-router.put('/:id/commerce', isAuthenticated, (req, res, next) => {
-	const { id } = req.params;
-	const { commercename, location, aboutme } = req.body;
+// router.put('/:id/commerce', isAuthenticated, (req, res, next) => {
+// 	const { id } = req.params;
+// 	const { commercename, location, aboutme } = req.body;
 
-	if (commercename === '' || location === '' || aboutme === '') {
-		res.status(400).json({ message: 'Please, compleate the mandaroty field' });
-		return;
-	}
-	User.findByIdAndUpdate(id, { commercename, location, aboutme }, { new: true })
-		.then((result) => {
-			res.json(result);
-		})
-		.catch((err) => next(err));
-});
+// 	if (commercename === '' || location === '' || aboutme === '') {
+// 		res.status(400).json({ message: 'Please, compleate the mandaroty field' });
+// 		return;
+// 	}
+// 	User.findByIdAndUpdate(id, { commercename, location, aboutme }, { new: true })
+// 		.then((result) => {
+// 			res.json(result);
+// 		})
+// 		.catch((err) => next(err));
+// });
 
 // router.put('/:userId/edit/chatsId', isAuthenticated, (req, res, next) => {
 // 	const { chatId } = req.body;

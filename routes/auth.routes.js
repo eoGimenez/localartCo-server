@@ -9,7 +9,6 @@ const saltRounds = 10;
 
 router.post('/signup', (req, res, next) => {
 	const { name, surname, commerceName, email, password, passwordRe, role, cif } = req.body;
-	console.log(email);
 	if (
 		email === '' ||
 		password === '' ||
@@ -57,6 +56,8 @@ router.post('/signup', (req, res, next) => {
 				commerceName,
 				role,
 				cif,
+				aboutme: 'Actualizar',
+				location: 'Seleccione ubicación',
 			});
 		})
 		.then((response) => {
@@ -89,7 +90,7 @@ router.post('/login', (req, res, next) => {
 			const {
 				_id,
 				email,
-				commercename,
+				commerceName,
 				role,
 				name,
 				surname,
@@ -102,7 +103,7 @@ router.post('/login', (req, res, next) => {
 			const payload = {
 				_id,
 				email,
-				commercename,
+				commerceName,
 				role,
 				name,
 				surname,
@@ -122,6 +123,7 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/verify', isAuthenticated, (req, res, next) => {
+	console.log(req.payload);
 	res.status(200).json(req.payload);
 });
 
