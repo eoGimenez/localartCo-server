@@ -8,15 +8,15 @@ const { isAuthenticated } = require('../middleware/jwt.middleware.js');
 const saltRounds = 10;
 
 router.post('/signup', (req, res, next) => {
-	const { name, surname, commercename, email, password, passwordRe, role, cif } = req.body;
-
+	const { name, surname, commerceName, email, password, passwordRe, role, cif } = req.body;
+	console.log(email);
 	if (
 		email === '' ||
 		password === '' ||
 		name === '' ||
 		passwordRe === '' ||
 		surname === '' ||
-		commercename === '' ||
+		commerceName === '' ||
 		role === '' ||
 		cif === ''
 	) {
@@ -54,14 +54,15 @@ router.post('/signup', (req, res, next) => {
 				password: hashedPassword,
 				name,
 				surname,
-				commercename,
+				commerceName,
 				role,
 				cif,
 			});
 		})
 		.then((response) => {
-			const { email, name, _id, surname, commercename, role, cif } = response;
-			const user = { email, name, surname, commercename, role, cif, _id };
+			console.log(response);
+			const { email, name, _id, surname, commerceName, role, cif } = response;
+			const user = { email, name, surname, commerceName, role, cif, _id };
 			res.status(201).json({ user: user });
 		})
 		.catch((err) => next(err));

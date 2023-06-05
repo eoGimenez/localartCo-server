@@ -20,7 +20,7 @@ const userSchema = new Schema(
 			type: String,
 			required: [true, 'Surname is required.'],
 		},
-		commercename: {
+		commerceName: {
 			type: String,
 			required: true,
 		},
