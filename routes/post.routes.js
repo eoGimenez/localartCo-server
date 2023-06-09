@@ -29,7 +29,6 @@ router.post(
 			batch,
 			price,
 			category,
-			available,
 			author,
 		})
 			.then((result) => {
