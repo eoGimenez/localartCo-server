@@ -56,7 +56,7 @@ router.post('/signup', (req, res, next) => {
 				commerceName,
 				role,
 				cif,
-				aboutme: 'Actualizar',
+				aboutme: 'About me',
 				location: 'Seleccione ubicación',
 			});
 		})
