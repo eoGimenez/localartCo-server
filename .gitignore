@@ -8,3 +8,7 @@ ehthumbs.db
 *.lnk
 
 .vscode/*
+
+Dockerfile
+fly.toml
+.dockerignore
