@@ -55,8 +55,22 @@ router.put(
 	'/:postId',
 	isAuthenticated,
 	/* isArtisan, */ (req, res, next) => {
-		const { title, contract, image, description, batch, price, category, available } = req.body;
+		const { title, contract, image, description, batch, price, category } = req.body;
 		const { postId } = req.params;
+		if (batch == 0) {
+			const available = false;
+			this.post
+				.findByIdAndUpdate(
+					postId,
+					{ title, contract, image, description, batch, price, category, available },
+					{ new: true }
+				)
+				.then((result) => {
+					res.status(200).json({ result });
+					return;
+				})
+				.catch((err) => next(err));
+		}
 		Post.findByIdAndUpdate(
 			postId,
 			{ title, contract, image, description, batch, price, category, available },
