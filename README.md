@@ -71,12 +71,11 @@ const postSchema = new Schema({
 | POST| /signup | const {name, surname, commercename, email, password, passwordRe,  role, cif } = req.body | json({user: user}) | Registers the user in the database.|
 | POST| /login | const {email, password  } = req.body | json({authToken: authToken}) | Log in an user already registered.|
 | GET| /verify | json (req.payload) |
-| GET| /all | User.Find() | json ({ json.response })|
+| GET| / | User.Find() | json ({ json.response })|
 | GET| /:userId| const { userId } = req.params | User.FindById() | json ({ json.result})|
-| PUT| /:userId/edit| const { userIs } = req.params|{email,password,passwordRe,name,surname ,cif,avatar,} = req.body | User.FindByIdAndUpdate() | json ({ updatedProfile }) | Edits the User's profile|
-| PUT| /:userId/edit/comemrce| const { userIs } = req.params|{commercename,location,aboutme} = req.body | User.FindByIdAndUpdate() | json ({ updatedProfile }) | Edits the Commerce's profile|
-| GET| /posts| const {posts} | json ({ posts })| Return a post's list|
-| POST| /new| const {contract, description, image, bach, price, category, available} = req=body | json ({ post:post }) | Adds a new Post|
+| PUT| /:id/| const { id } = req.params|{email,password,passwordRe,name,surname ,cif,avatar,} = req.body | User.FindByIdAndUpdate() | json ({ updatedProfile }) | Edits the User's profile|
+| GET| /| Post.find() | json ({ posts })| Return a post's list|
+| POST| /| const {contract, description, image, bach, price, category, available} = req=body | json ({ post:post }) | Adds a new Post|
 | GET| /:postId| const { postId } = req.params | Navigate to the selected post|
-| PUT| /:postId/edit | const { postId, {post} } =req.params/req.body | Edits the selected post|
-| DELETE| /:postId/delete| const { postId } = req.params | Delete a post|
+| PUT| /:postId| const { postId, {post} } =req.params/req.body | Edits the selected post|
+| DELETE| /:postId| const { postId } = req.params | Delete a post|
