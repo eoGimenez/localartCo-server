@@ -1,5 +1,5 @@
 # LocalArtCo - server
-Developed of our final proyect at IronHack. It's a MERN Stack application, check the frontend repository [here](https://github.com/eoGimenez/fair-trade-client).
+Developed of our final proyect at IronHack. It's a MERN Stack application, check the frontend repository [here](https://github.com/eoGimenez/localartCo-client).
 
 ## About
 We are Lucas, Lucia and Eugenio we met each other at the web development Bootcamp of IronHack. 
